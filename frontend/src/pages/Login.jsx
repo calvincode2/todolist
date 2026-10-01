@@ -14,25 +14,27 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 
-import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import { useAuth } from "../contexts/AuthContext";
 
 function Login() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
   const navigate = useNavigate();
+  const { login, api } = useAuth();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
 
     try {
-      const response = await axios.post("http://127.0.0.1:8000/api/login", {
+      const response = await api.post("/login", {
         email: email,
         password: password,
       });
 
-      localStorage.setItem("token", response.data.token);
+      // Simpan user dan token ke AuthContext
+      login(response.data.user, response.data.token);
 
       await Swal.mixin({
         toast: true,
@@ -49,12 +51,11 @@ function Login() {
         title: response.data.message,
       });
 
-      console.log(response.data);
-
+      // Redirect langsung ke todo board berdasarkan role
       if (response.data.user.role === "project_manager") {
-        navigate("/project-manager/dashboard");
+        navigate("/project-manager/todos");
       } else if (response.data.user.role === "programmer") {
-        navigate("/programmer/dashboard");
+        navigate("/programmer/todos");
       }
     } catch (error) {
       Swal.mixin({
@@ -92,6 +93,7 @@ function Login() {
                 id="email"
                 type="email"
                 placeholder="Masukkan email"
+                autoComplete="email"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
               />
@@ -104,6 +106,7 @@ function Login() {
                 id="password"
                 type="password"
                 placeholder="Masukkan password"
+                autoComplete="current-password"
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
               />

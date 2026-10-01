@@ -90,6 +90,7 @@ function Register() {
                 id="email"
                 type="email"
                 placeholder="Masukkan email"
+                autoComplete="email"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
               />{" "}
@@ -101,6 +102,7 @@ function Register() {
                 id="password"
                 type="password"
                 placeholder="Masukkan password"
+                autoComplete="new-password"
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
               />{" "}
@@ -115,6 +117,7 @@ function Register() {
                 id="confirmPassword"
                 type="password"
                 placeholder="Masukkan ulang password"
+                autoComplete="new-password"
                 value={confirmPassword}
                 onChange={(e) => setConfirmPassword(e.target.value)}
               />{" "}

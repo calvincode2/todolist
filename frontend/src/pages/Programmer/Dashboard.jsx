@@ -2,7 +2,7 @@ import Swal from "sweetalert2";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "../../contexts/AuthContext";
 
-function ProjectManagerDashboard() {
+function ProgrammerDashboard() {
   const navigate = useNavigate();
   const { user, logout } = useAuth();
 
@@ -27,10 +27,10 @@ function ProjectManagerDashboard() {
     <div className="min-h-screen bg-gray-50 p-8">
       <div className="flex items-center justify-between">
         <div>
-          <h1 className="text-3xl font-bold">Dashboard Project Manager</h1>
+          <h1 className="text-3xl font-bold">Dashboard Programmer</h1>
 
           <p className="mt-2 text-gray-600">
-            Selamat datang, {user?.name || "Project Manager"}
+            Selamat datang, {user?.name || "Programmer"}
           </p>
         </div>
 
@@ -45,4 +45,4 @@ function ProjectManagerDashboard() {
   );
 }
 
-export default ProjectManagerDashboard;
+export default ProgrammerDashboard;
